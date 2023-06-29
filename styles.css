@@ -4,10 +4,17 @@
     box-sizing: border-box;
 }
 
+:root {
+    --hue: 200;
+    --saturation: 50%;
+    --foreground-color: hsl(var(--hue), var(--saturation), 75%);
+    --background-color: hsl(var(--hue), var(--saturation), 20%);
+}
+
 body {
     width: 100vw;
     height: 100vh;
-    background-color: #333;
+    background-color: var(--background-color);
     color: #eee;
 }
 
@@ -19,6 +26,14 @@ body {
     border: 1px solid red;
     width: 56vh;
     height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+}
+
+.tetromino {
+    background-color: var(--foreground-color);
+    border: 1px solid red;
 }
 
 .info {
