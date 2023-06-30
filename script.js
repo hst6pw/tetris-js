@@ -50,6 +50,8 @@ const ROTATIONS = {
 }
 
 const gameBoard = document.querySelector("#game-board")
+const scoreSpan = document.querySelector("#score")
+let score = 0
 
 class Piece {
     constructor(rotations) {
@@ -219,6 +221,7 @@ function main(currentTime) {
         currentPiece.moveDown()
     } else {
         // check lines clear
+        let rowsRemoved = 0
         Array.from(gameBoard.children).forEach(square => {
             if (parseInt(square.style.gridColumnStart) === 1) {
                 const squares = []
@@ -233,6 +236,9 @@ function main(currentTime) {
                 squares.forEach(div => {
                     div.remove()
                 })
+                
+                rowsRemoved += 1
+
                 let counter = parseInt(square.style.gridRowStart)
                 while (counter > 1) {
                     Array.from(gameBoard.querySelectorAll(`.tetromino[style*="grid-row-start: ${counter - 1};"]`)).forEach(squareAbove => {
@@ -243,6 +249,8 @@ function main(currentTime) {
                 
             }
         })
+
+        score += (rowsRemoved * rowsRemoved)
 
         currentPiece = new Piece(nextPieceRotations)
         nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
@@ -256,6 +264,7 @@ function main(currentTime) {
     }
 
     lastTime = currentTime
+    scoreSpan.innerHTML = score
 }
 
 window.addEventListener("keydown", event => {
