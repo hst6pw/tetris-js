@@ -51,7 +51,9 @@ const ROTATIONS = {
 
 const gameBoard = document.querySelector("#game-board")
 const scoreSpan = document.querySelector("#score")
+const highScoreSpan = document.querySelector("#high-score")
 let score = 0
+let highScore = 0
 
 class Piece {
     constructor(rotations) {
@@ -258,6 +260,10 @@ function main(currentTime) {
         // check loss
         if (currentPiece.overlaps()) {
             gameBoard.innerHTML = ""
+            if (score > highScore) {
+                highScore = score
+            }
+            score = 0
             currentPiece = new Piece(nextPieceRotations)
             nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
         }
@@ -265,6 +271,7 @@ function main(currentTime) {
 
     lastTime = currentTime
     scoreSpan.innerHTML = score
+    highScoreSpan.innerHTML = highScore
 }
 
 window.addEventListener("keydown", event => {
