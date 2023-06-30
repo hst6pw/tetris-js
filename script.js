@@ -250,7 +250,7 @@ function main(currentTime) {
             }
         })
 
-        score += (rowsRemoved * rowsRemoved)
+        score += (rowsRemoved * rowsRemoved) * 1000
 
         currentPiece = new Piece(nextPieceRotations)
         nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
