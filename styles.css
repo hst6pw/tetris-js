@@ -8,6 +8,14 @@
     --hue: 200;
     --saturation: 50%;
     --foreground-color: hsl(var(--hue), var(--saturation), 75%);
+    --j: hsl(var(--hue), var(--saturation), 75%);
+    --l: hsl(calc(var(--hue) + 50), var(--saturation), 75%);
+    --t: hsl(calc(var(--hue) + 100), var(--saturation), 75%);
+    --o: hsl(calc(var(--hue) + 150), var(--saturation), 75%);
+    --i: hsl(calc(var(--hue) + 200), var(--saturation), 75%);
+    --s: hsl(calc(var(--hue) + 250), var(--saturation), 75%);
+    --z: hsl(calc(var(--hue) + 300), var(--saturation), 75%);
+    --border-color: hsl(calc(var(--hue) + 180), var(--saturation), 20%);
     --background-color: hsl(var(--hue), var(--saturation), 20%);
 }
 
@@ -33,7 +41,35 @@ body {
 
 .tetromino {
     background-color: var(--foreground-color);
-    border: 1px solid red;
+    border: 1px solid var(--border-color);
+}
+
+.j {
+    background-color: var(--j);
+}
+
+.l {
+    background-color: var(--l);
+}
+
+.t {
+    background-color: var(--t);
+}
+
+.o {
+    background-color: var(--o);
+}
+
+.i {
+    background-color: var(--i);
+}
+
+.s {
+    background-color: var(--s);
+}
+
+.z {
+    background-color: var(--z);
 }
 
 .info {
