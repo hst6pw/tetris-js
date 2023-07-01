@@ -49,6 +49,36 @@ const ROTATIONS = {
     ]
 }
 
+const DISPLAY_ROTATIONS = {
+    J: [
+        { x: 1, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    L: [
+        { x: 3, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    I: [
+        { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 }
+    ],
+
+    O: [
+        { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    S: [
+        { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }
+    ],
+
+    Z: [
+        { x: 2, y: 1 }, { x: 2, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    T: [
+        { x: 2, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ]
+}
+
 const gameBoard = document.querySelector("#game-board")
 
 export class Piece {

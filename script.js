@@ -49,9 +49,40 @@ const ROTATIONS = {
     ]
 }
 
+const DISPLAY_ROTATIONS = [
+    [
+        { x: 1, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    [
+        { x: 3, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    [
+        { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 }
+    ],
+
+    [
+        { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    [
+        { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }
+    ],
+
+    [
+        { x: 2, y: 1 }, { x: 2, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ],
+
+    [
+        { x: 2, y: 1 }, { x: 1, y: 2 }, { x: 2, y: 2 }, { x: 3, y: 2 }
+    ]
+]
+
 const gameBoard = document.querySelector("#game-board")
 const scoreSpan = document.querySelector("#score")
 const highScoreSpan = document.querySelector("#high-score")
+const nextTetromino = document.querySelector("#next-tetromino")
 let score = 0
 let highScore = 0
 
@@ -263,8 +294,19 @@ function main(currentTime) {
 
         score += (rowsRemoved * rowsRemoved) * 1000
 
+        let randIndex = Math.floor(Math.random() * 7)
+        
         currentPiece = new Piece(nextPieceRotations)
-        nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
+        nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[randIndex]]
+
+        nextTetromino.innerHTML = ""
+        DISPLAY_ROTATIONS[randIndex].forEach(coord => {
+            const tetrominoElem = document.createElement("div")
+            tetrominoElem.style.gridColumnStart = coord.x
+            tetrominoElem.style.gridRowStart = coord.y
+            tetrominoElem.classList.add("tetromino")
+            nextTetromino.appendChild(tetrominoElem)
+        })
 
         // check loss
         if (currentPiece.overlaps()) {
