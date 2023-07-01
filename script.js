@@ -277,17 +277,21 @@ function main(currentTime) {
 window.addEventListener("keydown", event => {
     switch (event.key) {
         case "ArrowRight":
+        case "d":
             currentPiece.moveRight()
             break
         case "ArrowLeft":
+        case "a":
             currentPiece.moveLeft()
             break
         case "ArrowDown":
+        case "s":
             if (!currentPiece.atBottom()) {
                 currentPiece.moveDown()
             }
             break
         case "ArrowUp":
+            case "w":
             currentPiece.rotate()
     }
 })
