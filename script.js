@@ -98,15 +98,24 @@ class Piece {
             }
         })
 
-        if (pieceNextRotation) {
+        if (pieceNextRotation || this.rotations[this.currentRotation].some(coord => {
+            return coord.y > 20
+        })) {
             this.currentRotation--
             return
         }
 
-        while (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
+        if (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
             this.moveRight()
         }
-        while (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
+        if (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
+            this.moveRight()
+        }
+
+        if (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
+            this.moveLeft()
+        }
+        if (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
             this.moveLeft()
         }
     }
