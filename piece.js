@@ -99,10 +99,17 @@ export class Piece {
             return
         }
 
-        while (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
+        if (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
             this.moveRight()
         }
-        while (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
+        if (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
+            this.moveRight()
+        }
+
+        if (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
+            this.moveLeft()
+        }
+        if (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
             this.moveLeft()
         }
     }

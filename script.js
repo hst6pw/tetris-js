@@ -291,7 +291,7 @@ window.addEventListener("keydown", event => {
             }
             break
         case "ArrowUp":
-            case "w":
+        case "w":
             currentPiece.rotate()
     }
 })
