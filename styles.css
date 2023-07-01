@@ -21,8 +21,10 @@
 
 body {
     width: 100vw;
-    height: 100vh;
-    background-color: var(--background-color);
+    /* height: 100vh;
+    background-color: var(--background-color); */
+    background: url("pic.JPG");
+    background-size: cover;
     color: #eee;
 }
 
