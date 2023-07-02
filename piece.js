@@ -5,56 +5,81 @@ const gameBoard = document.querySelector("#game-board")
 export class Piece {
     constructor(rotations) {
         this.rotations = JSON.parse(JSON.stringify(rotations))
-        this.currentRotation = 0
+        this.currentRotationIndex = 0
         this.tetrominoElems = []
-        this.rotations[this.currentRotation].forEach(coord => {
+        this.rotations[this.currentRotationIndex] // [{x, y}, {x, y}, {x, y}, {x, y}]
+        .forEach(coord => {
             const tetrominoElem = document.createElement("div")
             tetrominoElem.style.gridColumnStart = coord.x
             tetrominoElem.style.gridRowStart = coord.y
-            tetrominoElem.classList.add("tetromino")
-            tetrominoElem.classList.add(Object.keys(ROTATIONS).find(key => ROTATIONS[key] === rotations).toString().toLowerCase())
+            const tetrominoLetter = Object.keys(ROTATIONS).find(key => ROTATIONS[key] === rotations).toString().toLowerCase()
+            tetrominoElem.classList.add("tetromino", tetrominoLetter)
             gameBoard.appendChild(tetrominoElem)
             this.tetrominoElems.push(tetrominoElem)
         })
-
-        console.log(Object.keys(ROTATIONS).find(key => ROTATIONS[key] === rotations))
     }
 
     update() {
-        this.rotations[this.currentRotation].forEach((coord, index) => {
+        this.rotations[this.currentRotationIndex].forEach((coord, index) => {
             this.tetrominoElems[index].style.gridColumnStart = coord.x
             this.tetrominoElems[index].style.gridRowStart = coord.y
-            this.tetrominoElems[index].style.setProperty("grid-column-start", coord.x)
-            this.tetrominoElems[index].style.setProperty("grid-row-start", coord.y)
         })
+
+        if (this.rotations.some(rotation => Array.from(rotation).some(coord => coord.x === -1))) {
+            console.log("test")
+        }
     }
 
     rotate() {
-        this.currentRotation++
-        if (this.currentRotation === 4) this.currentRotation = 0
+        this.currentRotationIndex++
+        if (this.currentRotationIndex === 4) this.currentRotationIndex = 0
 
-        let pieceNextRotation = false
-
-        Array.from(gameBoard.children).forEach(square => {
-            if (this.rotations[this.currentRotation].some(coord => {
-                if (parseInt(square.style.gridColumnStart) === coord.x && parseInt(square.style.gridRowStart) === coord.y && !this.tetrominoElems.includes(square)) {
-                    return true
-                }
-            })) {
-                pieceNextRotation = true
-            }
-        })
-
-        if (pieceNextRotation) {
-            this.currentRotation--
+        if (this.overlaps()) {
+            this.currentRotationIndex--
             return
         }
 
-        while (this.rotations[this.currentRotation].some(coord => coord.x < 1)) {
-            this.moveRight()
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.y > 20)) {
+            this.currentRotationIndex--
+            return
         }
-        while (this.rotations[this.currentRotation].some(coord => coord.x > 10)) {
+
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.x < 1)) {
+            this.moveRight()
+            if (this.overlaps()) {
+                this.currentRotationIndex--
+                this.moveLeft()
+                return
+            }
+        }
+
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.x < 1)) {
+            this.moveRight()
+            if (this.overlaps()) {
+                this.currentRotationIndex--
+                this.moveLeft()
+                this.moveLeft()
+                return
+            }
+        }
+
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.x > 10)) {
             this.moveLeft()
+            if (this.overlaps()) {
+                this.currentRotationIndex--
+                this.moveRight()
+                return
+            }
+        }
+
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.x > 10)) {
+            this.moveLeft()
+            if (this.overlaps()) {
+                this.currentRotationIndex--
+                this.moveRight()
+                this.moveRight()
+                return
+            }
         }
     }
 
@@ -67,12 +92,12 @@ export class Piece {
     }
 
     moveRight() {
-        if (this.rotations[this.currentRotation].some(coord => coord.x > 9)) return
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.x > 9)) return
 
         let pieceRight = false
 
         Array.from(gameBoard.children).forEach(square => {
-            if (this.rotations[this.currentRotation].some(coord => {
+            if (this.rotations[this.currentRotationIndex].some(coord => {
                 if (parseInt(square.style.gridColumnStart) - 1 === coord.x && parseInt(square.style.gridRowStart) === coord.y && !this.tetrominoElems.includes(square)) {
                     return true
                 }
@@ -91,12 +116,12 @@ export class Piece {
     }
 
     moveLeft() {
-        if (this.rotations[this.currentRotation].some(coord => coord.x < 2)) return
+        if (this.rotations[this.currentRotationIndex].some(coord => coord.x < 2)) return
 
         let pieceLeft = false
         
         Array.from(gameBoard.children).forEach(square => {
-            if (this.rotations[this.currentRotation].some(coord => {
+            if (this.rotations[this.currentRotationIndex].some(coord => {
                 if (parseInt(square.style.gridColumnStart) + 1 === coord.x && parseInt(square.style.gridRowStart) === coord.y && !this.tetrominoElems.includes(square)) {
                     return true
                 }
@@ -117,7 +142,7 @@ export class Piece {
     atBottom() {
         let pieceBelow = false
         Array.from(gameBoard.children).forEach(square => {
-            if (this.rotations[this.currentRotation].some(coord => {
+            if (this.rotations[this.currentRotationIndex].some(coord => {
                 if (parseInt(square.style.gridRowStart) - 1 === coord.y && parseInt(square.style.gridColumnStart) === coord.x && !this.tetrominoElems.includes(square)) {
                     return true
                 }
@@ -125,14 +150,14 @@ export class Piece {
                 pieceBelow = true
             }
         })
-        return this.rotations[this.currentRotation].some(coord => coord.y >= 20) || pieceBelow
+        return this.rotations[this.currentRotationIndex].some(coord => coord.y >= 20) || pieceBelow
     }
 
     overlaps() {
         let overlap = false
 
         Array.from(gameBoard.children).forEach(square => {
-            if (this.rotations[this.currentRotation].some(coord => {
+            if (this.rotations[this.currentRotationIndex].some(coord => {
                 if (parseInt(square.style.gridColumnStart) === coord.x && parseInt(square.style.gridRowStart) === coord.y && !this.tetrominoElems.includes(square)) {
                     return true
                 }

@@ -53,7 +53,8 @@ function main(currentTime) {
         })
 
         currentPiece = new Piece(nextPieceRotations)
-        nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
+        // nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
+        nextPieceRotations = ROTATIONS["I"]
 
         // check loss
         if (currentPiece.overlaps()) {
@@ -84,5 +85,4 @@ window.addEventListener("keydown", event => {
     }
 })
 
-// setInterval(() => currentPiece.moveDown(), 1000)
 window.requestAnimationFrame(main)
