@@ -31,7 +31,7 @@ body {
 }
 
 .game-board {
-    border: 1px solid red;
+    border: 16px solid var(--border-color);
     width: 56vh;
     height: 100vh;
     display: grid;
@@ -42,6 +42,15 @@ body {
 .tetromino {
     background-color: var(--foreground-color);
     border: 1px solid var(--border-color);
+}
+
+.next-tetromino {
+    display: grid;
+    width: 100%;
+    height: 15%;
+    padding: 1vmin;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .j {

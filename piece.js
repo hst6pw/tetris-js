@@ -24,10 +24,6 @@ export class Piece {
             this.tetrominoElems[index].style.gridColumnStart = coord.x
             this.tetrominoElems[index].style.gridRowStart = coord.y
         })
-
-        if (this.rotations.some(rotation => Array.from(rotation).some(coord => coord.x === -1))) {
-            console.log("test")
-        }
     }
 
     rotate() {
