@@ -3,6 +3,7 @@ import { Piece } from "./piece.js"
 import "./swiped-events.js"
 
 const GAME_SPEED = 3
+const MOVEMENT_SPEED = 10
 const gameBoard = document.querySelector("#game-board")
 const scoreSpan = document.querySelector("#score")
 const highScoreSpan = document.querySelector("#high-score")
@@ -110,29 +111,29 @@ function main(currentTime) {
 }
 
 document.addEventListener("keydown", event => {
-        switch (event.key) {
-            case "d":
-            case "ArrowRight":
-                if (!paused) currentPiece.moveRight()
-                break
-            case "a":
-            case "ArrowLeft":
-                if (!paused) currentPiece.moveLeft()
-                break
-            case "s":
-            case "ArrowDown":
-                if (!currentPiece.atBottom() && !paused) {
-                    currentPiece.moveDown()
-                }
-                break
-            case "w":
-            case "ArrowUp":
-                if (!paused) currentPiece.rotate()
-                break
-            case "Escape":
-                paused = !paused
-                break
-        }
+    switch (event.key) {
+        case "d":
+        case "ArrowRight":
+            if (!paused) currentPiece.moveRight()
+            break
+        case "a":
+        case "ArrowLeft":
+            if (!paused) currentPiece.moveLeft()
+            break
+        case "s":
+        case "ArrowDown":
+            if (!currentPiece.atBottom() && !paused) {
+                currentPiece.moveDown()
+            }
+            break
+        case "w":
+        case "ArrowUp":
+            if (!paused) currentPiece.rotate()
+            break
+        case "Escape":
+            paused = !paused
+            break
+    }
 })
 
 document.addEventListener("swiped-left", event => {
