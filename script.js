@@ -12,8 +12,19 @@ let highScore = localStorage.getItem("high-score") ? localStorage.getItem("high-
 
 highScoreSpan.innerHTML = highScore
 
+let randIndex = Math.floor(Math.random() * 7)
+
 let currentPiece = new Piece(ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]])
-let nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]]
+let nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[randIndex]]
+Array.from(DISPLAY_ROTATIONS[randIndex]) // [{x, y}, {x, y}, {x, y}, {x, y}]
+        .forEach(coord => {
+            const tetrominoElem = document.createElement("div")
+            tetrominoElem.style.gridColumnStart = coord.x
+            tetrominoElem.style.gridRowStart = coord.y
+            const tetrominoLetter = Object.keys(ROTATIONS).find(key => ROTATIONS[key] === ROTATIONS[Object.keys(ROTATIONS)[randIndex]]).toString().toLowerCase()
+            tetrominoElem.classList.add("tetromino", tetrominoLetter)
+            nextTetromino.appendChild(tetrominoElem)
+        })
 
 let lastTime = 0
 
@@ -68,7 +79,7 @@ function main(currentTime) {
         scoreSpan.innerHTML = score
 
         nextTetromino.innerHTML = ""
-        let randIndex = Math.floor(Math.random() * 7)
+        randIndex = Math.floor(Math.random() * 7)
         currentPiece = new Piece(nextPieceRotations)
         nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[randIndex]]
         Array.from(DISPLAY_ROTATIONS[randIndex]) // [{x, y}, {x, y}, {x, y}, {x, y}]
