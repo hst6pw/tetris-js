@@ -101,7 +101,11 @@ body {
 
 .info .scores {
     padding: 2vw;
-    font-size: 2vw;
+    font-size: min(6vw, 3rem);
+}
+
+.scores span {
+    display: block;
 }
 
 @media (max-width: 70vh) {
