@@ -7,7 +7,7 @@ export class Piece {
         this.rotations = JSON.parse(JSON.stringify(rotations))
         this.currentRotationIndex = 0
         this.tetrominoElems = []
-        this.rotations[this.currentRotationIndex] // [{x, y}, {x, y}, {x, y}, {x, y}]
+        this.rotations[this.currentRotationIndex]
         .forEach(coord => {
             const tetrominoElem = document.createElement("div")
             tetrominoElem.style.gridColumnStart = coord.x

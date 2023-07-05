@@ -17,7 +17,7 @@ let randIndex = Math.floor(Math.random() * 7)
 
 let currentPiece = new Piece(ROTATIONS[Object.keys(ROTATIONS)[Math.floor(Math.random() * 7)]])
 let nextPieceRotations = ROTATIONS[Object.keys(ROTATIONS)[randIndex]]
-Array.from(DISPLAY_ROTATIONS[randIndex]) // [{x, y}, {x, y}, {x, y}, {x, y}]
+Array.from(DISPLAY_ROTATIONS[randIndex])
         .forEach(coord => {
             const tetrominoElem = document.createElement("div")
             tetrominoElem.style.gridColumnStart = coord.x
@@ -46,7 +46,6 @@ function main(currentTime) {
         if (!currentPiece.atBottom()) {
             currentPiece.moveDown()
         } else {
-            // check lines clear
             let rowsCleared = 0
 
             Array.from(gameBoard.children).forEach(square => {
@@ -93,7 +92,6 @@ function main(currentTime) {
                 nextTetromino.appendChild(tetrominoElem)
             })
 
-            // check loss
             if (currentPiece.overlaps()) {
                 gameBoard.innerHTML = ""
                 if (score > highScore) highScore = score
