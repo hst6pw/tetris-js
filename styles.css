@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Amatic SC', cursive;
+}
+
+:root {
+    --hue: 0;
+    --j: hsl(var(--hue), 50%, 75%);
+    --l: hsl(calc(var(--hue) + 360/7*1), 50%, 75%);
+    --t: hsl(calc(var(--hue) + 360/7*2), 50%, 75%);
+    --o: hsl(calc(var(--hue) + 360/7*3), 50%, 75%);
+    --i: hsl(calc(var(--hue) + 360/7*4), 50%, 75%);
+    --s: hsl(calc(var(--hue) + 360/7*5), 50%, 75%);
+    --z: hsl(calc(var(--hue) + 360/7*6), 50%, 75%);
+    --background-color: hsla(var(--hue), 50%, 25%, 0.3);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-color);
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+}
+
+.game-board {
+    border: 8px solid black;
+    border-right-width: 4px;
+    width: 56vh;
+    height: 100vh;
+    display: grid;
+    background-image: url("background.jpeg");
+    background-size: auto;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+}
+
+.tetromino {
+    border: 1px solid black;
+}
+
+.next-tetromino {
+    display: grid;
+    width: 100%;
+    height: 14%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.j {
+    background-color: var(--j);
+}
+
+.l {
+    background-color: var(--l);
+}
+
+.t {
+    background-color: var(--t);
+}
+
+.o {
+    background-color: var(--o);
+}
+
+.i {
+    background-color: var(--i);
+}
+
+.s {
+    background-color: var(--s);
+}
+
+.z {
+    background-color: var(--z);
+}
+
+.info {
+    border: 8px solid black;
+    border-left-width: 4px;
+    width: 14vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #333;
+    text-align: center;
+}
+
+.info .scores {
+    padding: 2vw;
+}
+
+@media (max-width: 70vh) {
+    .game-board {
+        width: calc(560/7 * 1vw);
+        height: calc(1000/7 * 1vw);
+    }
+
+    .info {
+        width: calc(140/7 * 1vw);
+        height: calc(1000/7 * 1vw);
+    }
+}
