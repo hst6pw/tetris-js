@@ -32,11 +32,13 @@ export class Piece {
 
         if (this.overlaps()) {
             this.currentRotationIndex--
+            if (this.currentRotationIndex === -1) this.currentRotationIndex = 3
             return
         }
 
         if (this.rotations[this.currentRotationIndex].some(coord => coord.y > 20)) {
             this.currentRotationIndex--
+            if (this.currentRotationIndex === -1) this.currentRotationIndex = 3
             return
         }
 
@@ -44,6 +46,7 @@ export class Piece {
             this.forceMoveRight()
             if (this.overlaps()) {
                 this.currentRotationIndex--
+                if (this.currentRotationIndex === -1) this.currentRotationIndex = 3
                 this.forceMoveLeft()
                 return
             }
@@ -53,6 +56,7 @@ export class Piece {
             this.forceMoveRight()
             if (this.overlaps()) {
                 this.currentRotationIndex--
+                if (this.currentRotationIndex === -1) this.currentRotationIndex = 3
                 this.forceMoveLeft()
                 this.forceMoveLeft()
                 return
@@ -63,6 +67,7 @@ export class Piece {
             this.forceMoveLeft()
             if (this.overlaps()) {
                 this.currentRotationIndex--
+                if (this.currentRotationIndex === -1) this.currentRotationIndex = 3
                 this.forceMoveRight()
                 return
             }
@@ -72,6 +77,7 @@ export class Piece {
             this.forceMoveLeft()
             if (this.overlaps()) {
                 this.currentRotationIndex--
+                if (this.currentRotationIndex === -1) this.currentRotationIndex = 3
                 this.forceMoveRight()
                 this.forceMoveRight()
                 return

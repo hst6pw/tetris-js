@@ -103,6 +103,10 @@ body {
     text-align: center;
 }
 
+.info .scores {
+    padding: 2vw;
+}
+
 @media (max-width: 70vh) {
     .game-board {
         width: calc(560/7 * 1vw);
