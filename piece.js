@@ -41,39 +41,39 @@ export class Piece {
         }
 
         if (this.rotations[this.currentRotationIndex].some(coord => coord.x < 1)) {
-            this.moveRight()
+            this.forceMoveRight()
             if (this.overlaps()) {
                 this.currentRotationIndex--
-                this.moveLeft()
+                this.forceMoveLeft()
                 return
             }
         }
 
         if (this.rotations[this.currentRotationIndex].some(coord => coord.x < 1)) {
-            this.moveRight()
+            this.forceMoveRight()
             if (this.overlaps()) {
                 this.currentRotationIndex--
-                this.moveLeft()
-                this.moveLeft()
+                this.forceMoveLeft()
+                this.forceMoveLeft()
                 return
             }
         }
 
         if (this.rotations[this.currentRotationIndex].some(coord => coord.x > 10)) {
-            this.moveLeft()
+            this.forceMoveLeft()
             if (this.overlaps()) {
                 this.currentRotationIndex--
-                this.moveRight()
+                this.forceMoveRight()
                 return
             }
         }
 
         if (this.rotations[this.currentRotationIndex].some(coord => coord.x > 10)) {
-            this.moveLeft()
+            this.forceMoveLeft()
             if (this.overlaps()) {
                 this.currentRotationIndex--
-                this.moveRight()
-                this.moveRight()
+                this.forceMoveRight()
+                this.forceMoveRight()
                 return
             }
         }
@@ -107,6 +107,22 @@ export class Piece {
         this.rotations.forEach(rotation => {
             rotation.forEach(coord => {
                 coord.x++
+            })
+        })
+    }
+
+    forceMoveRight() {
+        this.rotations.forEach(rotation => {
+            rotation.forEach(coord => {
+                coord.x++
+            })
+        })
+    }
+
+    forceMoveLeft() {
+        this.rotations.forEach(rotation => {
+            rotation.forEach(coord => {
+                coord.x--
             })
         })
     }
