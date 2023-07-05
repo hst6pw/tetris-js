@@ -119,3 +119,15 @@ body {
         height: calc(1000/7 * 1vw);
     }
 }
+
+.pause {
+    padding: 2vw;
+    margin: 2vw;
+    font-size: min(6vw, 3rem);
+    transition: all 0.55s ease-in;
+}
+
+.pause:hover {
+    background-color: #333;
+    color: white;
+}

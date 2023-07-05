@@ -8,6 +8,7 @@ const gameBoard = document.querySelector("#game-board")
 const scoreSpan = document.querySelector("#score")
 const highScoreSpan = document.querySelector("#high-score")
 const nextTetromino = document.querySelector("#next-tetromino")
+const pauseButton = document.querySelector("#pause")
 
 let score = 0
 let highScore = localStorage.getItem("high-score") ? localStorage.getItem("high-score") : 0
@@ -30,6 +31,10 @@ Array.from(DISPLAY_ROTATIONS[randIndex])
         })
 
 let lastTime = 0
+
+pauseButton.addEventListener("click", () => {
+    paused = !paused
+})
 
 function main(currentTime) {
     window.requestAnimationFrame(main)
@@ -149,7 +154,7 @@ document.addEventListener("swiped-up", event => {
 })
 
 document.addEventListener("swiped-down", event => {
-    if (!paused) currentPiece.moveDown()
+    if (!paused && !currentPiece.atBottom()) currentPiece.moveDown()
 })
 
 window.requestAnimationFrame(main)
