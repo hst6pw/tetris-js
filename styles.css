@@ -9,26 +9,26 @@
 
 :root {
     --hue: 200;
-    --saturation: 50%;
-    --foreground-color: hsl(var(--hue), var(--saturation), 75%);
-    --j: hsl(var(--hue), var(--saturation), 75%);
-    --l: hsl(calc(var(--hue) + 50), var(--saturation), 75%);
-    --t: hsl(calc(var(--hue) + 100), var(--saturation), 75%);
-    --o: hsl(calc(var(--hue) + 150), var(--saturation), 75%);
-    --i: hsl(calc(var(--hue) + 200), var(--saturation), 75%);
-    --s: hsl(calc(var(--hue) + 250), var(--saturation), 75%);
-    --z: hsl(calc(var(--hue) + 300), var(--saturation), 75%);
-    --border-color: hsl(calc(var(--hue) + 180), var(--saturation), 20%);
-    --background-color: hsl(var(--hue), var(--saturation), 20%);
+    --foreground-color: hsl(var(--hue), 50%, 75%);
+    --j: hsl(var(--hue), 50%, 75%);
+    --l: hsl(calc(var(--hue) + 360/7*1), 50%, 75%);
+    --t: hsl(calc(var(--hue) + 360/7*2), 50%, 75%);
+    --o: hsl(calc(var(--hue) + 360/7*3), 50%, 75%);
+    --i: hsl(calc(var(--hue) + 360/7*4), 50%, 75%);
+    --s: hsl(calc(var(--hue) + 360/7*5), 50%, 75%);
+    --z: hsl(calc(var(--hue) + 360/7*6), 50%, 75%);
+    --border-color: hsl(calc(var(--hue) + 180), 50%, 20%);
+    --background-color: hsl(var(--hue), 50%, 20%);
 }
 
 body {
     width: 100vw;
     height: 100vh;
     background-color: var(--background-color);
-    color: #eee;
-    background-image: url("background.jpeg");
-    background-size: auto;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
 }
 
 .container {
@@ -36,17 +36,20 @@ body {
 }
 
 .game-board {
-    border: 16px solid var(--border-color);
+    border: 8px solid black;
+    border-right-width: 4px;
     width: 56vh;
     height: 100vh;
     display: grid;
+    background-image: url("background.jpeg");
+    background-size: auto;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(20, 1fr);
 }
 
 .tetromino {
     background-color: var(--foreground-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid black;
 }
 
 .next-tetromino {
@@ -87,26 +90,26 @@ body {
 }
 
 .info {
-    border: 1px solid khaki;
+    border: 8px solid black;
+    border-left-width: 4px;
     width: 14vh;
     height: 100vh;
-    font-size: 1.8rem;
+    font-size: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     background-color: #333;
+    text-align: center;
 }
 
 @media (max-width: 70vh) {
     .game-board {
-        border: 1px solid magenta;
         width: calc(560/7 * 1vw);
         height: calc(1000/7 * 1vw);
     }
 
     .info {
-        border: 1px solid saddlebrown;
         width: calc(140/7 * 1vw);
         height: calc(1000/7 * 1vw);
     }
