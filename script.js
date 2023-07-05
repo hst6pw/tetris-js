@@ -110,45 +110,45 @@ function main(currentTime) {
 }
 
 document.addEventListener("keydown", event => {
-    switch (event.key) {
-        case "d":
-        case "ArrowRight":
-            currentPiece.moveRight()
-            break
-        case "a":
-        case "ArrowLeft":
-            currentPiece.moveLeft()
-            break
-        case "s":
-        case "ArrowDown":
-            if (!currentPiece.atBottom()) {
-                currentPiece.moveDown()
-            }
-            break
-        case "w":
-        case "ArrowUp":
-            currentPiece.rotate()
-            break
-        case "Escape":
-            paused = !paused
-            break
-    }
+        switch (event.key) {
+            case "d":
+            case "ArrowRight":
+                if (!paused) currentPiece.moveRight()
+                break
+            case "a":
+            case "ArrowLeft":
+                if (!paused) currentPiece.moveLeft()
+                break
+            case "s":
+            case "ArrowDown":
+                if (!currentPiece.atBottom() && !paused) {
+                    currentPiece.moveDown()
+                }
+                break
+            case "w":
+            case "ArrowUp":
+                if (!paused) currentPiece.rotate()
+                break
+            case "Escape":
+                paused = !paused
+                break
+        }
 })
 
 document.addEventListener("swiped-left", event => {
-    currentPiece.moveLeft()
+    if (!paused) currentPiece.moveLeft()
 })
 
 document.addEventListener("swiped-right", event => {
-    currentPiece.moveRight()
+    if (!paused) currentPiece.moveRight()
 })
 
 document.addEventListener("swiped-up", event => {
-    currentPiece.rotate()
+    if (!paused) currentPiece.rotate()
 })
 
 document.addEventListener("swiped-down", event => {
-    currentPiece.moveDown()
+    if (!paused) currentPiece.moveDown()
 })
 
 window.requestAnimationFrame(main)
