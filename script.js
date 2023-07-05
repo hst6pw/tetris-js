@@ -1,5 +1,6 @@
 import { DISPLAY_ROTATIONS, ROTATIONS } from "./constants.js"
 import { Piece } from "./piece.js"
+import "./swiped-events.js"
 
 const GAME_SPEED = 3
 const gameBoard = document.querySelector("#game-board")
@@ -108,19 +109,23 @@ function main(currentTime) {
     }
 }
 
-window.addEventListener("keydown", event => {
+document.addEventListener("keydown", event => {
     switch (event.key) {
+        case "d":
         case "ArrowRight":
             currentPiece.moveRight()
             break
+        case "a":
         case "ArrowLeft":
             currentPiece.moveLeft()
             break
+        case "s":
         case "ArrowDown":
             if (!currentPiece.atBottom()) {
                 currentPiece.moveDown()
             }
             break
+        case "w":
         case "ArrowUp":
             currentPiece.rotate()
             break
@@ -128,6 +133,22 @@ window.addEventListener("keydown", event => {
             paused = !paused
             break
     }
+})
+
+document.addEventListener("swiped-left", event => {
+    currentPiece.moveLeft()
+})
+
+document.addEventListener("swiped-right", event => {
+    currentPiece.moveRight()
+})
+
+document.addEventListener("swiped-up", event => {
+    currentPiece.rotate()
+})
+
+document.addEventListener("swiped-down", event => {
+    currentPiece.moveDown()
 })
 
 window.requestAnimationFrame(main)
